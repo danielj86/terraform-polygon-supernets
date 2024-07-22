@@ -7,13 +7,13 @@ variable "aws_profile" {
 variable "base_instance_type" {
   description = "The type of instance that we're going to use"
   type        = string
-  default     = "c6a.large"
+  default     = "t3.2xlarge"
 }
 
 variable "company_name" {
   description = "The name of the company for this particular deployment"
   type        = string
-  default     = "company"
+  default     = "othentic"
 }
 
 variable "create_ssh_key" {
@@ -67,7 +67,7 @@ variable "fullnode_count" {
 variable "geth_count" {
   description = "The number of geth nodes that we're going to deploy"
   type        = number
-  default     = 1
+  default     = 0
   validation {
     condition = (
       var.geth_count == 0 || var.geth_count == 1
@@ -121,17 +121,17 @@ variable "private_network_mode" {
 variable "region" {
   description = "The region where we want to deploy"
   type        = string
-  default     = "eu-west-1"
+  default     = "us-east-1"
 }
 
 variable "validator_count" {
   description = "The number of validators that we're going to deploy"
   type        = number
-  default     = 4
+  default     = 1
 }
 
 variable "zones" {
   description = "The availability zones for deployment"
   type        = list(string)
-  default     = ["eu-west-1a", "eu-west-1b", "eu-west-1c"]
+  default     = ["us-east-1a", "us-east-1b", "us-east-1c"]
 }
