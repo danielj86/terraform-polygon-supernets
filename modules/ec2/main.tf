@@ -50,7 +50,7 @@ resource "aws_instance" "validator" {
 
   root_block_device {
     delete_on_termination = true
-    volume_size           = 30
+    volume_size           = 50
     volume_type           = "gp2"
   }
 
@@ -75,7 +75,7 @@ resource "aws_instance" "fullnode" {
 
   root_block_device {
     delete_on_termination = true
-    volume_size           = 30
+    volume_size           = 50
     volume_type           = "gp2"
   }
   network_interface {
@@ -99,7 +99,7 @@ resource "aws_instance" "geth" {
 
   root_block_device {
     delete_on_termination = true
-    volume_size           = 30
+    volume_size           = 500
     volume_type           = "gp2"
   }
 
