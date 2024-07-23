@@ -8,7 +8,7 @@ chain_id: 88989
 
 ### Version Flags ###
 polycli_tag: 0.1.30 # https://github.com/maticnetwork/polygon-cli/releases
-edge_tag: 0504fa79632b0a2797a7598d87f6743cb9a1cd01 # this commit has improved logging from v1.1.0
+edge_tag: 761bc2231156ffa1445eb85cbdefec1a87544f65 # this commit has improved logging from v1.1.0
 geth_tag: v1.12.0
 go_tag: 1.20.7.linux-amd64
 
@@ -97,3 +97,17 @@ geth_http_port: 8545
 geth_miner_mnemonic: code code code code code code code code code code code quality
 geth_chain_id: 1001
 geth_p2p_port: 30303
+
+### GETH vars ###
+execution_client: "geth"
+network: "holesky"
+ethereum_dir: "/usr/local/bin"
+consensus_dir: "{{ ethereum_dir }}/consensus"
+execution_dir: "{{ ethereum_dir }}/execution"
+jwt_path: "{{ execution_dir }}/jwtsecret"
+prysm_url: "https://raw.githubusercontent.com/prysmaticlabs/prysm/master/prysm.sh"
+geth_latest_release_url: "https://api.github.com/repos/ethereum/go-ethereum/releases/latest"
+geth_commit_url: "https://api.github.com/repos/ethereum/go-ethereum/git/refs/tags"
+geth_store_base_url: "https://gethstore.blob.core.windows.net/builds"
+checkpoint_sync_url: "https://holesky.beaconstate.info"
+genesis_beacon_api_url: "https://holesky.beaconstate.info"
