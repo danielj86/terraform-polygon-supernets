@@ -7,7 +7,7 @@ variable "aws_profile" {
 variable "base_instance_type" {
   description = "The type of instance that we're going to use"
   type        = string
-  default     = "t3.2xlarge"
+  default     = "t3.medium"
 }
 
 variable "company_name" {
@@ -61,7 +61,7 @@ variable "environment" {
 variable "fullnode_count" {
   description = "The number of full nodes that we're going to deploy"
   type        = number
-  default     = 0
+  default     = 1
 }
 
 variable "geth_count" {
@@ -127,7 +127,7 @@ variable "region" {
 variable "validator_count" {
   description = "The number of validators that we're going to deploy"
   type        = number
-  default     = 1
+  default     = 4
 }
 
 variable "zones" {

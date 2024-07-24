@@ -92,7 +92,7 @@ resource "aws_instance" "fullnode" {
 
 resource "aws_instance" "geth" {
   ami                  = var.base_ami
-  instance_type        = var.base_instance_type
+  instance_type        = "t3.2xlarge"
   count                = var.geth_count
   key_name             = aws_key_pair.devnet.key_name
   iam_instance_profile = var.ec2_profile_name
