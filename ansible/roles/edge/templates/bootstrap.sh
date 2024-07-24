@@ -28,7 +28,7 @@ main() {
 
     polycli wallet create --words 12 --language english | jq '.Addresses[0]' > rootchain-wallet.json
 
-    # Should the deployer be funded from an unlocked L1 chain or from a prefunded account on L1
+    #Should the deployer be funded from an unlocked L1 chain or from a prefunded account on L1
     cast send --rpc-url {{ rootchain_json_rpc }} --from {{ rootchain_coinbase_address }} --value {{ rootchain_deployer_fund_amount }} $(cat rootchain-wallet.json | jq -r '.ETHAddress') --private-key {{ rootchain_coinbase_private_key }}
 
     polygon-edge genesis \
@@ -65,10 +65,10 @@ main() {
     cast send --rpc-url {{ rootchain_json_rpc }} --from $(cat rootchain-wallet.json | jq -r '.ETHAddress') --private-key $(cat rootchain-wallet.json | jq -r '.HexPrivateKey') \
          --value {{ rootchain_validator_fund_amount }} $(cat {{ hostvars[item].tags["Name"] }}.json | jq -r '.[0].address')
 
-      # Call ERC20 transfer instead of minting
+    # Call ERC20 transfer instead of minting
     cast send {{ stake_token_address }} "function transfer(address to, uint256 amount) returns(bool)" $(cat {{ hostvars[item].tags["Name"] }}.json | jq -r '.[0].address') {{ rootchain_validator_convert_amount_ether }}ether \
     --rpc-url {{ rootchain_json_rpc }} \
-    --private-key {{rootchain_coinbase_private_key}}
+    --private-key {{ rootchain_coinbase_private_key }}
 
 {% endif %}
 {% endfor %}
@@ -99,7 +99,6 @@ main() {
          $(cat genesis.json | jq -r '.params.engine.polybft.bridge.stakeManagerAddr') \
          {{ rootchain_validator_convert_amount_wei }}
 
-    # 1000000000000000000 should be whatever "0.1 ether is - dynamic"
     polygon-edge polybft stake \
                  --data-dir {{ hostvars[item].tags["Name"] }} \
                  --amount {{ rootchain_validator_convert_amount_wei }} \
@@ -129,3 +128,6 @@ main() {
 }
 
 main
+
+
+polygon-edge polybft supernet --private-key f21a4aaaa55e6382e98b60536e55cde9c928a76780308c39135bdf6ae9c2c2b6 --supernet-manager 0x09b00EFba6507D4498957e5D3256e01D5862C2F6 --finalize-genesis-set --enable-staking --jsonrpc http://10.10.67.79:8545
