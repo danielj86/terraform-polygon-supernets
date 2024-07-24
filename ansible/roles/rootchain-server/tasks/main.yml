@@ -145,3 +145,21 @@
 - name: Debug pm2 list output
   debug:
     var: pm2_process_list.stdout_lines
+
+- name: Wait for geth to sync with holesky
+  uri:
+    url: "http://localhost:8545"
+    method: POST
+    body: '{"jsonrpc":"2.0","method":"eth_syncing","params":[],"id":1}'
+    body_format: json
+    headers:
+      Content-Type: "application/json"
+  register: sync_status
+  until: sync_status.json.result is sameas false
+  retries: 240 # Wait 4 hours
+  delay: 60 # Delay between retries (in seconds)
+  ignore_errors: yes
+
+- name: Continue with other tasks
+  debug:
+    msg: "Geth node is fully synced. Continuing with other tasks."
